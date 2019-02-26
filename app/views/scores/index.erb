@@ -26,10 +26,12 @@
             <span id="name">Abstract Type</span>
             <span class="caret"></span>
           </button>
-          <ul class="dropdown-menu filter-types" role="menu">
-            <li><a id="session">Sessions</a></li>
-            <li><a id="workshop">Workshops</a></li>
-            <li><a id="lightning">Lightning Talks</a></li>
+	  <ul class="dropdown-menu filter-types" role="menu">
+            <li><a id="all">All (under construction)</a></li>   
+            <li><a id="external">DataStax (External)</a></li>
+            <li><a id="internal">DataStax (Internal)</a></li>
+	    <li><a id="oss">OSS C*</a></li>
+	    <li><a id="partner">Partner</a></li>
           </ul>
         </div>
       </div>
@@ -70,7 +72,7 @@
   // here in the frontend rather than backend like
   // we do for the sorting functionality.
   //
-  // We show Sessions by default and hide the others.
+  // We show all by default.
   */
 
   var updateTypeButton = function(label) {
@@ -82,8 +84,8 @@
     $('.abstracts li.' + type).removeClass('hidden');
   };
 
-  showAbstracts('session');
-  updateTypeButton('Sessions');
+  showAbstracts('internal');
+  updateTypeButton('DataStax (Internal)');
 
   $('.filter-types li').on('click', 'a', function() {
     showAbstracts(this.id);
