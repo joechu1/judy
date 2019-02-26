@@ -29,9 +29,11 @@
         <div id="navbar-spy" class="collapse navbar-collapse navHeaderCollapse">
           <ul class="nav navbar-nav navbar-right">
             <li class="home"><a href="/">Home</a></li>
-            <li class="abstracts"><a href="/abstracts">Abstracts</a></li>
+	    <li class="abstracts"><a href="/abstracts">Abstracts</a></li>
+	    <% if user_is_admin? || user_is_chair? %>
             <li class="scores"><a href="/scores">Scores</a></li>
-          </ul>
+	    <% end %>
+	  </ul>
         </div>
       </div>
     </div>

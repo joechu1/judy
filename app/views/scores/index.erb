@@ -1,4 +1,4 @@
-
+<% if user_is_admin? || user_is_chair? %>
 <% if @sort.eql?('mode') %>
 <div class="alert alert-warning">
   Note that we only sort on the <strong>mode</strong> if a single mode value was returned. Otherwise we report null and those entries will appear at the bottom of the list.
@@ -53,7 +53,7 @@
           <% end %>
         <% end %>
       </span>
-      <a href="/abstracts/<%= abstract.id %>"><%= abstract.title %></a><span class="author"> by <a href="mailto:<%= abstract[:email] %>"><%= abstract[:speaker] %></a></span><br>
+      <a href="/abstracts/<%= abstract.id %>"><%= abstract.title %></a><span class="author"> by <a href="mailto:<%= abstract[:email] %>"><%= abstract[:speaker] %>, <%= abstract[:job_title] %> (<%= abstract[:company] %>)</a></span><br>
       <% abstract[:scores].each do |review| %>
         <% if user_is_chair? %>
           <span class="count"><%= review[:count] %></span><span class="comment"><strong><%= review[:judge] %>:</strong>  <%= review[:comment] %></span><br>
@@ -92,3 +92,4 @@
     updateTypeButton($(this).text());
   });
 </script>
+<% end %>

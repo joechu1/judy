@@ -12,8 +12,10 @@
     <div class="buttons pull-right col-xs-12 col-sm-6 col-md-4">
       <div class="btn-group pull-right">
         <a class="btn btn-primary" href="/abstracts/next">Review</a>
-        <a class="btn btn-default" href="/abstracts/new">Create</a>
-        <button id="sort" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        <% if user_is_admin? %>	
+	<a class="btn btn-default" href="/abstracts/new">Create</a>
+        <% end %>
+	<button id="sort" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
           Sort
           <span class="caret"></span>
         </button>
@@ -35,7 +37,7 @@
         <%= abstract[:my_score] %>
       <% end %>
       </span>
-      <a href="/abstracts/<%= abstract.id %>"><%= abstract.title %></a><span class="author"> by <%= abstract[:speaker] %></span>
+      <a href="/abstracts/<%= abstract.id %>"><%= abstract.title %></a><span class="author"> by <%= abstract[:speaker] %>, <%= abstract[:job_title] %> (<%= abstract[:company] %>)</span>
     </li>
     <% end %>
   </ul>

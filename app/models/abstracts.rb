@@ -21,7 +21,7 @@ class Abstract < Sequel::Model
   end
 
   def self.fetch_all_abstracts_and_scores(args=nil)
-    @abstracts = Abstract.select(Sequel.lit('abstracts.*, speakers.full_name AS speaker, speakers.email, events.name AS event_name')).distinct.
+	  @abstracts = Abstract.select(Sequel.lit('abstracts.*, speakers.full_name AS speaker, speakers.email, speakers.title AS job_title, speakers.company, events.name AS event_name')).distinct.
       from(:abstracts, :speakers, :events).
       where(Sequel.lit('abstracts.speaker_id = speakers.id AND abstracts.event_id = events.id')).
       order(Sequel.lit('abstracts.id')).all
@@ -59,7 +59,7 @@ class Abstract < Sequel::Model
   end
 
   def self.fetch_one_abstract_with_score_by_judge(args)
-    @abstract = Abstract.select(Sequel.lit('abstracts.*, speakers.full_name AS speaker, speakers.email, events.name AS event_name')).
+    @abstract = Abstract.select(Sequel.lit('abstracts.*, speakers.full_name AS speaker, speakers.email, speakers.title AS job_title, speakers.company, events.name AS event_name')).
       from(:abstracts, :speakers, :events).
       where(Sequel.lit("abstracts.id = #{args[:id]} AND abstracts.speaker_id = speakers.id AND abstracts.event_id = events.id")).first
     @score = Score.filter(:judge => args[:judge], :abstract_id => args[:id]).first
@@ -97,11 +97,11 @@ class Abstract < Sequel::Model
   def self.type_label(type)
     # here we're associating a Bootstrap label class with each type
     case type
-    when 'session'
+    when 'internal'
       return 'primary'
-    when 'workshop'
+    when 'external'
       return 'success'
-    when 'lightning'
+    when 'oss'
       return 'warning'
     else
       return 'default'
