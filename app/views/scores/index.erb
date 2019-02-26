@@ -27,7 +27,7 @@
             <span class="caret"></span>
           </button>
 	  <ul class="dropdown-menu filter-types" role="menu">
-            <li><a id="all">All (under construction)</a></li>   
+            <li><a id="all">All</a></li>   
             <li><a id="external">DataStax (External)</a></li>
             <li><a id="internal">DataStax (Internal)</a></li>
 	    <li><a id="oss">OSS C*</a></li>
@@ -81,11 +81,16 @@
 
   var showAbstracts = function(type) {
     $('.abstracts li').addClass('hidden');
-    $('.abstracts li.' + type).removeClass('hidden');
+    if (type == 'all') {
+	    $('.abstracts li').removeClass('hidden'); 
+    }
+    else {
+	    $('.abstracts li.' + type).removeClass('hidden');
+    }
   };
 
-  showAbstracts('internal');
-  updateTypeButton('DataStax (Internal)');
+  showAbstracts('all');
+  updateTypeButton('All');
 
   $('.filter-types li').on('click', 'a', function() {
     showAbstracts(this.id);
