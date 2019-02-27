@@ -1,0 +1,13 @@
+<% if user_is_admin? || user_is_chair? %>
+Abstract Title,Type,Name,Job Title,Company,Reviewer,Score,Comment<% @abstracts.each do |abstract| %><% if abstract.type.eql?('internal')
+	         abstract.type = 'DataStax (Internal)'
+	      elsif abstract.type.eql?('external')
+		 abstract.type = 'DataStax (External)'
+	      elsif abstract.type.eql?('oss')
+	         abstract.type = 'OSS C*'
+	      elsif abstract.type.eql?('partner')
+                 abstract.type = 'Partner'
+	      end %><% abstract[:scores].each do |review| %>
+"<%= abstract.title %>","<%= abstract.type %>","<%= abstract[:speaker] %>","<%= abstract[:job_title] %>","<%= abstract[:company] %>",<%= review[:judge] %>,<%= review[:count] %>,"<%= review[:comment] %>"<% end %><% if abstract[:scores].count.eql?(0) %>
+"<%= abstract.title %>","<%= abstract.type %>","<%= abstract[:speaker] %>","<%= abstract[:job_title] %>","<%= abstract[:company] %>",,,<% end %><% end %>
+<% end %>

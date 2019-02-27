@@ -64,7 +64,7 @@ function logout() {
 	    <% if user_is_admin? || user_is_chair? %>
             <li class="scores"><a href="/scores">Scores</a></li>
 	    <% end %>
-	    <li class="logout"><a onclick="logout()" href="/"><%= session[:user] %> (Logout)</a></li>
+	    <li class="logout"><a onclick="logout()" href="/">Logout (<%= session[:user] %>)</a></li>
 	  </ul>
         </div>
       </div>

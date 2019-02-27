@@ -33,7 +33,17 @@
 	    <li><a id="oss">OSS C*</a></li>
 	    <li><a id="partner">Partner</a></li>
           </ul>
-        </div>
+	</div>
+	<div class="btn-group">
+          <button id="download" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+            <span id="name">Download</span>
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="/scores/csv/aggregate">Aggregated Scores</a></li>
+            <li><a href="/scores/csv/individual">Individual Scores and Comments</a></li>
+          </ul>
+	</div>
       </div>
     </div>
   </h1>
@@ -53,7 +63,8 @@
           <% end %>
         <% end %>
       </span>
-      <a href="/abstracts/<%= abstract.id %>"><%= abstract.title %></a><span class="author"> by <a href="mailto:<%= abstract[:email] %>"><%= abstract[:speaker] %>, <%= abstract[:job_title] %> (<%= abstract[:company] %>)</a></span><br>
+      <a href="/abstracts/<%= abstract.id %>"><%= abstract.title %></a><br>
+      <span class="score"></span><span class="author"> by <a href="mailto:<%= abstract[:email] %>"><%= abstract[:speaker] %>, <%= abstract[:job_title] %> (<%= abstract[:company] %>)</a></span><br><br>
       <% abstract[:scores].each do |review| %>
         <% if user_is_chair? %>
           <span class="count"><%= review[:count] %></span><span class="comment"><strong><%= review[:judge] %>:</strong>  <%= review[:comment] %></span><br>

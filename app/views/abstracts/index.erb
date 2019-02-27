@@ -37,7 +37,8 @@
         <%= abstract[:my_score] %>
       <% end %>
       </span>
-      <a href="/abstracts/<%= abstract.id %>"><%= abstract.title %></a><span class="author"> by <%= abstract[:speaker] %>, <%= abstract[:job_title] %> (<%= abstract[:company] %>)</span>
+      <a href="/abstracts/<%= abstract.id %>"><%= abstract.title %></a><br>
+      <span class="score"></span><span class="author"> by <%= abstract[:speaker] %>, <%= abstract[:job_title] %> (<%= abstract[:company] %>)</span>
     </li>
     <% end %>
   </ul>
