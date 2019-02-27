@@ -15,14 +15,29 @@
         <% if user_is_admin? %>	
 	<a class="btn btn-default" href="/abstracts/new">Create</a>
         <% end %>
-	<button id="sort" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-          Sort
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" role="menu">
-          <li><a id="desc" href="?sort=desc">High to Low Score</a></li>
-          <li><a id="asc" href="?sort=asc">Low to High Score</a></li>
-        </ul>
+	<div class="btn-group">
+	  <button id="type" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            <span id="name">Abstract Type</span>
+            <span class="caret"></span>
+          </button>
+	  <ul class="dropdown-menu filter-types" role="menu">
+            <li><a id="all">All</a></li>   
+            <li><a id="external">External</a></li>
+            <li><a id="internal">Internal</a></li>
+	    <li><a id="oss">OSS C*</a></li>
+	    <li><a id="partner">Partner</a></li>
+          </ul>
+	</div>
+	<div class="btn-group">
+	  <button id="sort" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            Sort
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a id="desc" href="?sort=desc">High to Low Score</a></li>
+            <li><a id="asc" href="?sort=asc">Low to High Score</a></li>
+          </ul>
+	</div>
       </div>
     </div>
   </h1>
@@ -31,7 +46,7 @@
 <div>
   <ul class="abstracts">
     <% @abstracts.each do |abstract| %>
-    <li>
+    <li class="<%= abstract.type %>">
       <span class="score">
       <% if ! abstract[:my_score].nil? %>
         <%= abstract[:my_score] %>
@@ -62,5 +77,33 @@
   // Hidden key combo for revealing authors
   jwerty.key('alt+a', function() {
     $('span.author').toggleClass('hidden');
+  });
+</script>
+
+<script>
+  /*
+  // We perform filtering based on abstract type
+  // here in the frontend rather than backend like
+  // we do for the sorting functionality.
+  //
+  // We show all by default.
+  */
+  var updateTypeButton = function(label) {
+    $('button#type span#name').text(label);
+  };
+  var showAbstracts = function(type) {
+    $('.abstracts li').addClass('hidden');
+    if (type == 'all') {
+	    $('.abstracts li').removeClass('hidden');
+    }
+    else {
+	    $('.abstracts li.' + type).removeClass('hidden');
+    }
+  };
+  showAbstracts('all');
+  updateTypeButton('All');
+  $('.filter-types li').on('click', 'a', function() {
+    showAbstracts(this.id);
+    updateTypeButton($(this).text());
   });
 </script>
