@@ -6,7 +6,7 @@
 <script>
   var charts = [
     {
-      title: 'Total Reviewed',
+      title: 'Total Reviewed (All users)',
       dataset: [<%= dataset_total_complete %>],
       colors: ('<%= dataset_total_complete %>' == '100.0, 0.0') ? ['#68E768', '#68E768'] : ['red', '#dfdfdf'],
       unit: '%'
@@ -18,7 +18,7 @@
       unit: '%'
     },
     {
-      title: 'Score Distribution',
+      title: 'Overall Score Distribution (All users)',
       dataset: [<%= dataset_score_distribution %>],
       colors: d3.scale.category20c()
     }

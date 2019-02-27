@@ -8,5 +8,5 @@ Abstract Title,Type,Name,Job Title,Company,Num Reviews,Mean Score,Median Score,M
 	      elsif abstract.type.eql?('partner')
                  abstract.type = 'Partner'
 	      end %>
-"<%= abstract.title %>","<%= abstract.type %>","<%= abstract[:speaker] %>","<%= abstract[:job_title] %>","<%= abstract[:company] %>",<%= abstract[:scores].count %>,<%= abstract[:mean_score] %>,<%= abstract[:median_score] %>,<%= abstract[:mode_score] %><% end %>
+"<%= abstract.title.gsub("\"","\"\"") %>","<%= abstract.type %>","<%= abstract[:speaker].gsub("\"","\"\"") %>","<%= abstract[:job_title].gsub("\"","\"\"") %>","<%= abstract[:company].gsub("\"","\"\"") %>",<%= abstract[:scores].count %>,<%= abstract[:mean_score] %>,<%= abstract[:median_score] %>,<%= abstract[:mode_score] %><% end %>
 <% end %>

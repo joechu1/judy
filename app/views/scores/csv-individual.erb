@@ -8,6 +8,6 @@ Abstract Title,Type,Name,Job Title,Company,Reviewer,Score,Comment<% @abstracts.e
 	      elsif abstract.type.eql?('partner')
                  abstract.type = 'Partner'
 	      end %><% abstract[:scores].each do |review| %>
-"<%= abstract.title %>","<%= abstract.type %>","<%= abstract[:speaker] %>","<%= abstract[:job_title] %>","<%= abstract[:company] %>",<%= review[:judge] %>,<%= review[:count] %>,"<%= review[:comment] %>"<% end %><% if abstract[:scores].count.eql?(0) %>
-"<%= abstract.title %>","<%= abstract.type %>","<%= abstract[:speaker] %>","<%= abstract[:job_title] %>","<%= abstract[:company] %>",,,<% end %><% end %>
+"<%= abstract.title.gsub("\"","\"\"") %>","<%= abstract.type %>","<%= abstract[:speaker].gsub("\"","\"\"") %>","<%= abstract[:job_title].gsub("\"","\"\"") %>","<%= abstract[:company].gsub("\"","\"\"") %>",<%= review[:judge].gsub("\"","\"\"") %>,<%= review[:count] %>,"<%= review[:comment].gsub("\"","\"\"") %>"<% end %><% if abstract[:scores].count.eql?(0) %>
+"<%= abstract.title.gsub("\"","\"\"") %>","<%= abstract.type %>","<%= abstract[:speaker].gsub("\"","\"\"") %>","<%= abstract[:job_title].gsub("\"","\"\"") %>","<%= abstract[:company].gsub("\"","\"\"") %>",,,<% end %><% end %>
 <% end %>
