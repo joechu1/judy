@@ -59,7 +59,7 @@
 <div class="well scoring col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
   <form id="score" action="#" method="post" role="form">
     <textarea name="comment" id="commentbox" class="form-control commentbox" rows="3" placeholder="Review Comments"><%= abstract[:comment] %></textarea>
-    <input class="col-xs-3 col-sm-8 col-md-6 col-lg-7" id="scoreSlider" data-slider-id="scoreSlider" type="text" data-slider-min="0" data-slider-max="5" data-slider-step="1" data-slider-value="<%= abstract[:score] || 0 %>"></input>
+    <input class="col-xs-3 col-sm-8 col-md-6 col-lg-7" id="scoreSlider" data-slider-id="scoreSlider" type="text" data-slider-min="1" data-slider-max="5" data-slider-step="1" data-slider-value="<%= abstract[:score] || 3 %>"></input>
     <span class="saveScore">
       <div class="btn-group">
         <button id="submit" class="btn btn-primary">Save Review</button>
@@ -86,7 +86,7 @@
 
 <!-- Scoring handler -->
 <script type="text/javascript">
-  var sliderValue = <%= abstract[:score] || 0 %>;
+  var sliderValue = <%= abstract[:score] || 3 %>;
 
   $('input#scoreSlider').slider({ tooltip: 'always' });
   $('#scoreSlider').on('slide', function(slideEvt) { sliderValue = slideEvt.value; });
